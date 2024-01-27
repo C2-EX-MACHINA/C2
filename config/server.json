@@ -1,0 +1,137 @@
+{
+    "server": {
+        "scripts_path": [
+            "./scripts/c2"
+        ],
+
+        "modules_path": ["./modules/"],
+        "modules": ["c2"]
+    },
+
+    "scripts": {
+        "order_instance.py": "config_add_order_instance",
+        "order_template.py": "config_add_order_template"
+    },
+
+    "config_add_order_instance": {
+        "timeout": 10,
+        "no_password": true,
+        "launcher": "python",
+        "category": "C2-EX-MACHINA",
+        "args": "config_add_order_instance_args",
+        "description": "Create an instance of order instance (ask to agents to execute tasks at specific time)"
+    },
+
+    "config_add_order_template": {
+        "timeout": 10,
+        "no_password": true,
+        "launcher": "python",
+        "category": "C2-EX-MACHINA",
+        "args": "config_add_order_template_args",
+        "description": "Create an instance of order template (create a task with content and metadata (like permissions, required tasks, ect...))"
+    },
+
+    "config_add_order_instance_args": {
+        "target-name": "arg_target_name",
+        "order-template-name": "arg_template_name",
+        "target-type": "arg_target_type",
+        "--start-datetime": "arg_start_datetime",
+        "--add-to-new-agents": "arg_add_to_new_agents",
+        "--list": "arg_list"
+    },
+
+    "arg_target_name": {
+        "example": "Windows",
+        "description": "The unique name to identify the target (use \"--list\" option to see all target names)"
+    },
+
+    "arg_template_name": {
+        "example": "CIS Debian server hardening template",
+        "description": "The unique name to identify the order template (use \"--list\" option to see all template names)"
+    },
+
+    "arg_start_datetime": {
+        "html_type": "datetime-local",
+        "example": "2016-06-22 18:55:12",
+        "description": "The minimum start time for the task."
+    },
+
+    "arg_add_to_new_agents": {
+        "html_type": "checkbox",
+        "description": "Add task to new agent added in the group after the order instance creation."
+    },
+
+    "arg_target_type": {
+        "example": "GROUP",
+        "predefined_values": ["Group", "Agent"],
+        "description": "The the task target type (GROUP or AGENT)."
+    },
+
+    "config_add_order_template_args": {
+        "name": "arg_name",
+        "description": "arg_description",
+        "type": "arg_type",
+        "data": "arg_data",
+        "--read-permission": "arg_read_permission",
+        "--execute-permission": "arg_execute_permission",
+        "--after": "arg_after",
+        "--filename": "arg_filename",
+        "--timeout": "arg_timeout",
+        "--list": "arg_list"
+    },
+
+    "arg_data": {
+        "input": true,
+        "html_type": "file",
+        "example": "script.py",
+        "description": "The file with data or payload as content for task."
+    },
+
+    "arg_description": {
+        "example": "This template hardens Debian servers (hardening based on CIS for Debian servers).",
+        "description": "The description to describe the template actions."
+    },
+
+    "arg_name": {
+        "example": "CIS Debian server hardening template",
+        "description": "The unique name to identify the template."
+    },
+
+    "arg_type": {
+        "example": "TEMPSCRIPT",
+        "description": "The task type (COMMAND, UPLOAD, DOWNLOAD, ...), you can list types available with the \"--list\" option"
+    },
+
+    "arg_read_permission": {
+        "example": "1000",
+        "html_type": "number",
+        "description": "The minimum group ID value necessary to read the task result (execution output)."
+    },
+
+    "arg_execute_permission": {
+        "example": "1000",
+        "html_type": "number",
+        "description": "The minimum group ID value necessary to start the task execution (order instance creation)."
+    },
+
+    "arg_after": {
+        "example": "CIS Debian server hardening template",
+        "description": "The task name required to start the task execution (this order will be executed after the required task)."
+    },
+
+    "arg_filename": {
+        "example": "script.ps1",
+        "description": "The filename where uploaded file will be written (used only for UPLOAD command)."
+    },
+
+    "arg_timeout": {
+        "example": "60",
+        "html_type": "number",
+        "description": "The timeout to kill the task execution if not terminated (without timeout you can have infinite task that can block the agent requests and responses)."
+    },
+
+    "arg_list": {
+        "html_type": "checkbox",
+        "description": "The timeout to kill the task execution if not terminated (without timeout you can have infinite task that can block the agent requests and responses)."
+    }
+}
